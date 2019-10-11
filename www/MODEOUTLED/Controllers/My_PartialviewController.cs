@@ -728,7 +728,7 @@ namespace MODEOUTLED.Controllers
 
         public ActionResult LoadDropdownLanguage()
         {
-            var list = db.Languages.Where(x => x.Status == 1).ToList();
+            var list = db.Languages.Where(x => x.Active == true).ToList();
             return PartialView(list);
         }
        

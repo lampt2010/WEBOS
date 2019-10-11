@@ -3,6 +3,7 @@
     ViewBag.Title = "Thêm mới nhóm thư viện";
     Layout = "~/Views/Shared/_LayoutAdmins.cshtml";
 }
+<script src="~/Scripts/common.js"></script>
 @section Scripts
 {
     <!-- Validate Data -->
@@ -13,36 +14,36 @@
             var JQUERY4U = {};
 
             JQUERY4U.UTIL =
-            {
-                setupFormValidation: function () {
-                    //validation rules
-                    $("#GroupLibraryCreateot-form").validate({
-                        rules: {
-                            Name: "required",
-                            Title: "required",
-                            Description: "required",
-                            Keyword: "required",
-                            Ord: {
-                                required: true,
-                                number: true
+                {
+                    setupFormValidation: function () {
+                        //validation rules
+                        $("#GroupLibraryCreateot-form").validate({
+                            rules: {
+                                Name: "required",
+                                Title: "required",
+                                Description: "required",
+                                Keyword: "required",
+                                Ord: {
+                                    required: true,
+                                    number: true
+                                }
+                            },
+                            messages: {
+                                Name: "Phải nhập tên nhóm",
+                                Title: "Phải nhập tiêu đề",
+                                Description: "Phải nhập miêu tả",
+                                Keyword: "Phải nhập từ khóa",
+                                Ord: {
+                                    required: "Phải nhập thứ tự",
+                                    number: "Phải nhập kiểu số"
+                                }
+                            },
+                            submitHandler: function (form) {
+                                form.submit();
                             }
-                        },
-                        messages: {
-                            Name: "Phải nhập tên nhóm",
-                            Title: "Phải nhập tiêu đề",
-                            Description: "Phải nhập miêu tả",
-                            Keyword: "Phải nhập từ khóa",
-                            Ord: {
-                                required: "Phải nhập thứ tự",
-                                number: "Phải nhập kiểu số"
-                            }
-                        },
-                        submitHandler: function (form) {
-                            form.submit();
-                        }
-                    });
+                        });
+                    }
                 }
-            }
 
             //when the dom has loaded setup form validation rules
             $(D).ready(function ($) {
@@ -50,6 +51,11 @@
             });
 
         })(jQuery, window, document);
+        function ChangeSlug(ele) {
+            var sl = Slug(ele);
+            $('#Title').val(sl);
+        }
+
     </script>
     <!-- End Validate Data -->
 }
@@ -60,8 +66,8 @@
         <div id="Breadcrumb" class="Block Breadcrumb ui-widget-content ui-corner-top ui-corner-bottom">
             <ul>
                 <li><a href='../../GroupLibrary/GroupLibraryIndexot'><i class="icon-home" style="font-size: 14px;"></i>Trang chủ</a></li>
-                <li class='SecondLast'><a href='../../GroupLibrary/GroupLibraryIndexot'>Danh mục nhóm tin</a></li>
-                <li class='Last'><span>Thêm mới nhóm tin</span></li>
+                <li class='SecondLast'><a href='../../GroupLibrary/GroupLibraryIndexot'>Danh mục nhóm thư viện</a></li>
+                <li class='Last'><span>Thêm mới nhóm thư viện</span></li>
             </ul>
         </div>
 
@@ -101,7 +107,7 @@
 
                         <div id="hiddenToolBarScroll" class="scrollBox hidden">
                             <h4>
-                                <i class="icon-reorder"></i>&nbsp;Thêm mới nhóm tin
+                                <i class="icon-reorder"></i>&nbsp;Thêm mới nhóm thư viện
                             </h4>
 
                             <div class="FloatMenuBar">
@@ -139,10 +145,10 @@
                                 <table class="admintable" style="width: 100%;">
                                     <tr>
                                         <td class="key">
-                                            Tên nhóm tin <span class="Required">*</span>
+                                            Tên nhóm thư viện <span class="Required">*</span>
                                         </td>
                                         <td>
-                                            @Html.TextBoxFor(model => model.Name, new { @class = "text" })
+                                            @Html.TextBoxFor(model => model.Name, new { @class = "text", @onchange = "ChangeSlug(this)" })
                                             <span class="tooltip-help">
                                                 <span class="tooltipContent">
                                                     <p class="tooltiptitle">
@@ -158,23 +164,41 @@
 
                                     <tr>
                                         <td class="key">
-                                            Tiêu đề <span class="Required">*</span>
+                                            Mã <span class="Required">*</span>
                                         </td>
                                         <td>
                                             @Html.TextBoxFor(model => model.Code, new { @class = "text" })
                                             <span class="tooltip-help">
                                                 <span class="tooltipContent">
                                                     <p class="tooltiptitle">
-                                                        Tiêu đề nhóm
+                                                        Mã nhóm
                                                     </p>
                                                     <p class="tooltipmessage">
-                                                        Tiêu đề nhóm 
+                                                        Mã nhóm
                                                     </p>
                                                 </span>
                                             </span>
                                         </td>
                                     </tr>
 
+                                    <tr>
+                                        <td class="key">
+                                            Tiêu đề <span class="Required">*</span>
+                                        </td>
+                                        <td>
+                                            @Html.TextBoxFor(model => model.Title, new { @class = "text" })
+                                            <span class="tooltip-help">
+                                                <span class="tooltipContent">
+                                                    <p class="tooltiptitle">
+                                                        Tiêu đề nhóm
+                                                    </p>
+                                                    <p class="tooltipmessage">
+                                                        Tiêu đề nhóm
+                                                    </p>
+                                                </span>
+                                            </span>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td class="key">
                                             Miêu tả <span class="Required">*</span>
@@ -232,9 +256,12 @@
                                         </td>
                                     </tr>
 
-                             
+                                    <tr>
+                                        <td class="key">Hình ảnh<span style="color:red">(*)</span></td>
+                                        <td>@Html.TextBoxFor(model => model.Image, new { @class = "" })<input id="SelectImages" type="button" value="Chọn ảnh" class="bottom" /></td>
+                                    </tr>
 
-                               
+
 
                                     <tr>
                                         <td class="key">
@@ -269,3 +296,14 @@
         }
     </div>
 </div>
+<script>
+    $(function () {
+        $("#SelectImages").click(function () {
+            var finder = new CKFinder();
+            finder.selectActionFunction = function (fileUrl) {
+                $("#Image").val(fileUrl);
+            };
+            finder.popup();
+        });
+    });
+</script>

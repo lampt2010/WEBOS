@@ -329,7 +329,7 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Status" Type="Int32" />
+    <Property Name="Active" Type="Boolean" />
     <Property Name="Images" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Library">
@@ -346,6 +346,7 @@
     <Property Name="Keyword" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="GroupLibrary" Relationship="Self.FK_Library_GroupLibrary" FromRole="Library" ToRole="GroupLibrary" />
     <NavigationProperty Name="LibraryDetails" Relationship="Self.FK_LibraryDetails_Library" FromRole="Library" ToRole="LibraryDetails" />
   </EntityType>
@@ -1503,7 +1504,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="Entities11" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="AccBanks" EntityType="Self.AccBank" />
     <EntitySet Name="Advertises" EntityType="Self.Advertise" />
     <EntitySet Name="Banks" EntityType="Self.Bank" />

@@ -37,7 +37,7 @@ function chkSelect_OnMouseOut1(tableRow, rowIndex) {
     }
 }
 function chkSelect_OnClick(checkBox, rowIndex) {
-    debugger
+  //  debugger
     var bgColor;
     re = new RegExp('chkSelect');
     re2 = new RegExp('chkSelectAll');
@@ -59,7 +59,7 @@ function chkSelect_OnClick(checkBox, rowIndex) {
     }
 }
 function chkSelectAll_OnClick(checkBox) {
-    debugger
+  //  debugger
     re = new RegExp('chkSelect');
     re2 = new RegExp('chkSelectAll');
     for (i = 0; i < document.forms[0].elements.length; i++) {
@@ -75,7 +75,7 @@ function chkSelectAll_OnClick(checkBox) {
     }
 }
 function chkSelectAll_OnClick1(checkBox) {
-    debugger
+   // debugger
     re = new RegExp('chkSelect');
     re2 = new RegExp('chkSelectAll');
     for (i = 0; i < document.forms[1].elements.length; i++) {

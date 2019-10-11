@@ -70,6 +70,26 @@
                     });
             }
         });
+        $(".Code").change(function () {
+            var id = $(this).attr("id");
+            var code = $(this).val();
+            if (code == "") {
+                // Báo lỗi nhập dữ liệu
+                $('#msg').show();
+                $('#update-message').removeClass().addClass("alert alert-error").text("Phải nhập tên nhóm tin tức.");
+                $('#msg').fadeOut(5000);
+            } else {
+                clearUpdateMessage();
+                $.post("/GroupLibrary/ChangeGroupLibrary", { "id": id, "code": code },
+                    function (data) {
+                        // Thay đổi thành công
+                        $('#msg').show();
+                        $('#update-message').removeClass().addClass("alert alert-info").text(htmlDecode(data));
+                        $('#msg').fadeOut(5000);
+                    });
+            }
+        });
+
     });
 
     function clearUpdateMessage() {
@@ -106,6 +126,7 @@
                 </th>
                 <th class="">Mã nhóm</th>
                 <th class="text">Tên nhóm </th>
+                <th scope="col" class="number">Hình ảnh</th>
                 <th scope="col" class="number" style="width: 100px;">Thứ tự</th>
                 <th scope="col" class="number" style="width: 100px;">Kích hoạt</th>
                 <th scope="col" class="number" style="width: 150px; text-align: center">Chức năng</th>
@@ -119,11 +140,20 @@
                     <td align="center">
                         @Html.TextBox("Code" + Model[i].Id, @Model[i].Code, new { @style = "width:250px; text-align: left", @class = "Name", @id = @Model[i].Id })
                     </td>
-                    
-
                     <td style="text-align: center">
-                        @Html.TextBox("Ord" + Model[i].Id, @Model[i].Name, new { @style = "width:250px; text-align: left", @class = "Name", @id = @Model[i].Id })
+                        @Html.TextBox("Name" + Model[i].Id, @Model[i].Name, new { @style = "width:250px; text-align: left", @class = "Name", @id = @Model[i].Id })
                     </td>
+                    <td>
+                        @if (Model[i].Image!=null && Model[i].Image!="")
+                        {
+                            <img src="@Model[i].Image" height="50" width="50" />
+                        }
+                        else
+                        {
+                            <img src="~/Images/no-image.jpg" height="50" width="50"/>
+                        }
+                    </td>
+
                     <td style="text-align: center">
                         @Html.TextBox("Ord" + Model[i].Id, @Model[i].Ord, new { @style = "width:50px; text-align: center", @class = "Ord", @id = @Model[i].Id, onblur = "this.value=formatNumber(this.value,'#,###','')", onfocus = "this.value=remote_format(this.value)" })
                     </td>
@@ -136,10 +166,10 @@
                            title="Thêm cấp con nhóm tin tức"><i class="icon-plus"></i></a>*@
 
                         <a href="../../GroupLibrary/GroupLibraryEditot?id=@Model[i].Id" class="action-link-button"
-                           title="Chỉnh sửa nhóm tin tức này"><i class="icon-edit"></i></a>
+                           title="Chỉnh sửa nhóm thư viện này"><i class="icon-edit"></i></a>
 
                         <a href="../../GroupLibrary/GroupLibraryDelete?id=@Model[i].Id&page=@ViewBag.mPage&pagesize=@ViewBag.PageSize" class="yesno action-link-button"
-                           title="Bạn chắc chắn muốn xóa nhóm tin tức này ?"><i class="icon-trash"></i></a>
+                           title="Bạn chắc chắn muốn xóa nhóm thư viện này ?"><i class="icon-trash"></i></a>
 
 
                     </td>

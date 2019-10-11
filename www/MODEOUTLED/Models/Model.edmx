@@ -309,7 +309,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Code" Type="varchar" MaxLength="50" />
           <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="Status" Type="int" />
+          <Property Name="Active" Type="bit" />
           <Property Name="Images" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Library">
@@ -326,6 +326,7 @@
           <Property Name="Keyword" Type="nvarchar" MaxLength="500" />
           <Property Name="Title" Type="nvarchar" MaxLength="250" />
           <Property Name="Code" Type="varchar" MaxLength="50" />
+          <Property Name="Image" Type="nvarchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="LibraryDetails">
           <Key>
@@ -3927,7 +3928,7 @@ FROM [dbo].[v_UserModule] AS [v_UserModule]</DefiningQuery>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" />
+          <Property Name="Active" Type="Boolean" />
           <Property Name="Images" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Library">
@@ -3944,6 +3945,7 @@ FROM [dbo].[v_UserModule] AS [v_UserModule]</DefiningQuery>
           <Property Name="Keyword" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="GroupLibrary" Relationship="Self.FK_Library_GroupLibrary" FromRole="Library" ToRole="GroupLibrary" />
           <NavigationProperty Name="LibraryDetails" Relationship="Self.FK_LibraryDetails_Library" FromRole="Library" ToRole="LibraryDetails" />
         </EntityType>
@@ -5101,7 +5103,7 @@ FROM [dbo].[v_UserModule] AS [v_UserModule]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities11" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AccBanks" EntityType="Self.AccBank" />
           <EntitySet Name="Advertises" EntityType="Self.Advertise" />
           <EntitySet Name="Banks" EntityType="Self.Bank" />
@@ -8502,7 +8504,7 @@ FROM [dbo].[v_UserModule] AS [v_UserModule]</DefiningQuery>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities11">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="AccBanks">
             <EntityTypeMapping TypeName="Model.AccBank">
               <MappingFragment StoreEntitySet="AccBank">
@@ -8822,7 +8824,7 @@ FROM [dbo].[v_UserModule] AS [v_UserModule]</DefiningQuery>
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="Images" ColumnName="Images" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -8840,6 +8842,7 @@ FROM [dbo].[v_UserModule] AS [v_UserModule]</DefiningQuery>
                 <ScalarProperty Name="Keyword" ColumnName="Keyword" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

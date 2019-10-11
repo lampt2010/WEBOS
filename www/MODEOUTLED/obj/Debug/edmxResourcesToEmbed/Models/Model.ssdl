@@ -304,7 +304,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Code" Type="varchar" MaxLength="50" />
     <Property Name="Name" Type="nvarchar" MaxLength="50" />
-    <Property Name="Status" Type="int" />
+    <Property Name="Active" Type="bit" />
     <Property Name="Images" Type="nvarchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="Library">
@@ -321,6 +321,7 @@
     <Property Name="Keyword" Type="nvarchar" MaxLength="500" />
     <Property Name="Title" Type="nvarchar" MaxLength="250" />
     <Property Name="Code" Type="varchar" MaxLength="50" />
+    <Property Name="Image" Type="nvarchar" MaxLength="250" />
   </EntityType>
   <EntityType Name="LibraryDetails">
     <Key>

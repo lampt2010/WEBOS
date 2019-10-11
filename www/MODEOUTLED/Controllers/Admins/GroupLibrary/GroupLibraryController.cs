@@ -69,15 +69,12 @@ namespace onsoft.Controllers.Admins.GroupLibrary
             if (Request.Cookies["Username"] != null)
             {
                 // Lấy dữ liệu từ view
-                int parentId = 0;
-                string level = "00000";
-                
-               
                 catego.Name = collection["Name"];
                 catego.Code = collection["Code"];
                 catego.Description = collection["Description"];
                 catego.Keyword = collection["Keyword"];
                 catego.Ord = Convert.ToInt32(collection["Ord"]);
+                catego.Image = collection["Image"];
                 catego.Active = (collection["Active"] == "false") ? false : true;
                 catego.Lang = Session["Lang"] != null ? Session["Lang"].ToString() : "vi";
                 db.Entry(catego).State = EntityState.Added;
@@ -116,30 +113,18 @@ namespace onsoft.Controllers.Admins.GroupLibrary
         {
             if (Request.Cookies["Username"] != null)
             {
-                var catego = db.GroupNews.Find(id);
+                var catego = db.GroupLibraries.Find(id);
                 // Lấy dữ liệu từ view
                 string name = collection["Name"];
                 
                 catego.Name = name;
                 catego.Title = collection["Title"];
                 catego.Description = collection["Description"];
+                catego.Image = collection["Image"];
                 catego.Keyword = collection["Keyword"];
                 catego.Ord = Convert.ToInt32(collection["Ord"]);
-                catego.Tag = StringClass.NameToTag(collection["Name"]);
-                catego.Priority = (collection["Priority"] == "false") ? false : true;
-                catego.Index = (collection["Index"] == "false") ? false : true;
                 catego.Active = (collection["Active"] == "false") ? false : true;
                 catego.Lang = Session["Lang"] != null ? Session["Lang"].ToString() : "vi";
-                string groid = collection["Cat"];
-                if (groid != null && groid != "")
-                {
-                    catego.GrpID = int.Parse(groid);
-                }
-                else
-                {
-                    catego.GrpID = 0;
-                }
-
                 db.Entry(catego).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("GroupLibraryIndexot");
@@ -183,6 +168,143 @@ namespace onsoft.Controllers.Admins.GroupLibrary
         }
         #endregion
 
+        #region[MultiCommand]
+        [HttpPost]
+        public ActionResult MultiCommand(FormCollection collect)
+        {
+            int m = int.Parse(collect["mPage"]);
+            int pagesize = int.Parse(collect["PageSize"]);
 
+            List<Models.GroupLibrary> GroupLibs = db.GroupLibraries.ToList();
+            int lastpage = GroupLibs.Count / pagesize;
+            if (GroupLibs.Count % pagesize > 0)
+            {
+                lastpage++;
+            }
+            //int lastPage = int.Parse(collect["LastPage"]);
+
+            if (Request.Cookies["Username"] != null)
+            {
+
+                if (collect["btnDelete"] != null)
+                {
+                    //string str = "";
+                    foreach (string key in Request.Form)
+                    {
+                        var checkbox = "";
+                        if (key.Contains("chk"))
+                        {
+                            checkbox = Request.Form["" + key];
+                            if (checkbox != "false")
+                            {
+                                int id = Convert.ToInt32(key.Remove(0, 3));
+                                var Del = (from del in db.GroupLibraries where del.Id == id select del).SingleOrDefault();
+                                //if (Del.SpTon == 0)
+                                //{
+                                db.GroupLibraries.Remove(Del);
+                                db.SaveChanges();
+                                //}
+                                //else
+                                //{
+                                //    str += Del.Name + ",";
+                                //    Session["DeletePro"] = "Sản phẩm " + str + "  vẫn còn trong kho! Không được xóa!";
+                                //}
+                            }
+                        }
+                    }
+
+                    if (collect["checkAll"] != null)
+                    {
+                        if (m == 1)
+                        {
+                            return RedirectToAction("GroupLibraryIndexot");
+                        }
+
+                        if (m == lastpage)
+                        {
+                            m--;
+                        }
+                    }
+                    return RedirectToAction("GroupLibraryIndexot", new { page = m });
+                }
+                else
+                {
+                    foreach (string key in Request.Form)
+                    {
+                        if (key.StartsWith("Ord"))
+                        {
+                            Int32 id = Convert.ToInt32(key.Remove(0, 3));
+                            var Up = db.GroupLibraries.Where(e => e.Id == id).FirstOrDefault();
+
+                            if (Up != null)
+                            {
+                                if (!collect["Ord" + id].Equals(""))
+                                {
+                                    Up.Ord = int.Parse(collect["Ord" + id]);
+                                }
+
+                                db.Entry(Up).State = System.Data.EntityState.Modified;
+                                db.SaveChanges();
+                            }
+
+                        }
+                    }
+                    return RedirectToAction("GroupLibraryIndexot", new { page = m });
+                }
+            }
+            else
+            {
+                return Redirect("/Admins/admins");
+            }
+        }
+        #endregion
+
+
+        // AJAX: /Product/ChangeProduct
+
+        // AJAX: /Product/ChangeActive
+        [HttpPost]
+        public ActionResult ChangeActive(int id)
+        {
+            var news = db.GroupLibraries.Find(id);
+            if (news != null)
+            {
+                news.Active = news.Active == true ? false : true;
+            }
+            db.Entry(news).State = EntityState.Modified;
+            db.SaveChanges();
+
+            var results = "Trạng thái kích hoạt đã được thay đổi.";
+            return Json(results);
+        }
+        // AJAX: /Product/ChangeIndex
+        [HttpPost]
+        public ActionResult ChangeGroupLibrary(int id, string name, int? ord, string code)
+        {
+            var results = "";
+            var lib = db.GroupLibraries.Find(id);
+            if (lib != null)
+            {
+                if (name != null)
+                {
+                    lib.Name = name;
+                    results = "Tên đã được thay đổi.";
+                }
+                if (code != null)
+                {
+                    lib.Code = code;
+                    results = "Mã đã được thay đổi.";
+                }
+                if (ord != null)
+                {
+                    lib.Ord = ord;
+                    results = "Thứ tự đã được thay đổi.";
+                }
+            }
+            db.Entry(lib).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return Json(results);
+        }
     }
 }

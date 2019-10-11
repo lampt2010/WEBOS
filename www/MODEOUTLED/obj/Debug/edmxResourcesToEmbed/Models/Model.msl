@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities11">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
     <EntitySetMapping Name="AccBanks">
       <EntityTypeMapping TypeName="Model.AccBank">
         <MappingFragment StoreEntitySet="AccBank">
@@ -320,7 +320,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Code" ColumnName="Code" />
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
           <ScalarProperty Name="Images" ColumnName="Images" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -338,6 +338,7 @@
           <ScalarProperty Name="Keyword" ColumnName="Keyword" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Image" ColumnName="Image" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

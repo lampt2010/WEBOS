@@ -17,7 +17,7 @@ namespace onsoft.Models
         public int Id { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
-        public Nullable<int> Status { get; set; }
+        public Nullable<bool> Active { get; set; }
         public string Images { get; set; }
     }
 }

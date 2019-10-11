@@ -29,6 +29,7 @@ namespace onsoft.Models
         public string Keyword { get; set; }
         public string Title { get; set; }
         public string Code { get; set; }
+        public string Image { get; set; }
     
         public virtual GroupLibrary GroupLibrary { get; set; }
         public virtual ICollection<LibraryDetail> LibraryDetails { get; set; }

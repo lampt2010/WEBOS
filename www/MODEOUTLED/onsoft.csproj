@@ -209,6 +209,8 @@
     <Compile Include="Controllers\Admins\GroupLibrary\GroupLibraryController.cs" />
     <Compile Include="Controllers\Admins\GroupNews\GroupNewController.cs" />
     <Compile Include="Controllers\Admins\GroupSupport\GroupSupportController.cs" />
+    <Compile Include="Controllers\Admins\Lang\LanguageController.cs" />
+    <Compile Include="Controllers\Admins\Library\LibraryController.cs" />
     <Compile Include="Controllers\Admins\Member\MemberController.cs" />
     <Compile Include="Controllers\Admins\Menu\MenuController.cs" />
     <Compile Include="Controllers\Admins\New\NewsController.cs" />
@@ -2155,6 +2157,7 @@
     <Content Include="Images\icontuido.png" />
     <Content Include="Images\icon_cuoi.png" />
     <Content Include="Images\meu.png" />
+    <Content Include="Images\no-image.jpg" />
     <Content Include="Images\v0.png" />
     <Content Include="Images\v1.png" />
     <Content Include="Images\v2.png" />
@@ -2734,11 +2737,20 @@
     <Content Include="Views\GroupLibrary\_PartialGroupLibraryPaging.cshtml" />
     <Content Include="Views\GroupLibrary\GroupLibraryIndexot.cshtml" />
     <Content Include="Views\GroupLibrary\GroupLibraryCreateot.cshtml" />
+    <Content Include="Views\GroupLibrary\GroupLibraryEditot.cshtml" />
+    <Content Include="Views\Library\LibraryIndexot.cshtml" />
+    <Content Include="Views\Library\_PartialLibraryIndex.cshtml" />
+    <Content Include="Views\Library\LibraryCreateot.cshtml" />
+    <Content Include="Views\Library\_PartialLibraryPaging.cshtml" />
+    <Content Include="Views\Language\LanguageIndexot.cshtml" />
+    <Content Include="Views\Language\_PartialLanguageIndex.cshtml" />
+    <Content Include="Views\Language\_PartialLanguagePaging.cshtml" />
+    <Content Include="Views\Language\LanguageCreateot.cshtml" />
+    <Content Include="Views\Language\LanguageEditot.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\FileUpload\" />
-    <Folder Include="Controllers\Admins\Library\" />
     <Folder Include="example\" />
     <Folder Include="Filters\" />
     <Folder Include="Images\slide\" />
