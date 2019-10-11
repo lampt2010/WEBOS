@@ -1,0 +1,3 @@
+﻿@model IList<onsoft.Models.v_Product_Baocao>
+@Html.Raw(ViewBag.script)
+<div id="chart" style=""></div>

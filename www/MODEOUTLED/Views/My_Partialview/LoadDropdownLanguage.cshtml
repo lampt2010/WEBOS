@@ -1,0 +1,43 @@
+﻿
+@model IList<onsoft.Models.Language>
+<select onchange=" return ChangeLang()" id="cbLang">
+
+
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        @*<li><a onclick="return ChangeLang('@Model[i].Code')" href="#"><img src="@Model[i].Images" /> @Model[i].Name</a> </li>*@
+        if (Session["Lang"] != null)
+        {
+            if (Session["Lang"].ToString() == Model[i].Code)
+            {
+                <option value="@Model[i].Code" selected="selected">@Model[i].Name</option>
+            }
+            else
+            {
+                <option value="@Model[i].Code">@Model[i].Name</option>
+            }
+
+        }
+        else
+        {
+            <option value="@Model[i].Code">@Model[i].Name</option>
+        }
+    }
+    @*<li><a href="#"><i class="icon-key"></i>Đổi mật khẩu</a></li>*@
+
+</select>
+<script type="text/javascript">
+ 
+    function ChangeLang() {
+        var lang = $('#cbLang').val();
+         $.ajax({
+            url: '/Base/ChangeCulture',
+            type: 'post',
+            data: { "ddlCulture": lang, "returnUrl": window.location.href},
+            dataType: 'json',
+            success: function (data) {
+                window.location.reload(1);
+            }
+        });
+    }
+</script>

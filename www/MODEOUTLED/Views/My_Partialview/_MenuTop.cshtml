@@ -1,0 +1,69 @@
+﻿<script type="text/javascript">
+    jQuery(document).ready(function () {
+        jQuery('ul#nav li').hover(function () {
+            jQuery(this).find('ul:first').css({ visibility: "visible", display: "none" }).show(400);
+        }, function () {
+            jQuery(this).find('ul:first').css({ visibility: "hidden" });
+        });
+    })
+</script>
+<script type="text/javascript">
+						$(function() {
+						var sticky_navigation_offset_top = $('#menu').offset().top;
+						var sticky_navigation = function(){
+							var scroll_top = $(window).scrollTop();
+							if (scroll_top > sticky_navigation_offset_top) { 
+								$('#menu').addClass('fixed');
+							} else {
+								$('#menu').removeClass('fixed'); 
+							}   
+						};
+						// run our function on load
+						sticky_navigation();
+						// and run it again every time you scroll
+						$(window).scroll(function() {
+							 sticky_navigation();
+						});
+					});
+					</script>
+<nav id="menu" class="bold upp ">
+    <ul>
+        @Html.Raw(ViewBag.Cat)
+    </ul>
+</nav>
+<div id="fix-menu"  style="background-color:#333">
+    <nav class="devmastermenu slideLeft clearfix menuclose fix-top-nav">
+        <ul class="mobile-sub devmastermenu-list ">
+            @Html.Raw(ViewBag.Catmo)
+            @*<li>
+                <a href='~/lien-he' class="text-uppercase" id="lienhe">Liên hệ suco</a>
+            </li>
+            <li>
+                <a href='~/san-pham' class="smoothScroll text-uppercase">
+                    sản phẩm suco
+                </a>
+            </li>
+            <li>
+                <a href='~/digital-marketing/' id="duan" class="text-uppercase">Dịch vụ Digital Marketing</a>
+            </li>
+            <li>
+                <a href='~/dich-vu-phim-quang-cao' class="smoothScroll text-uppercase">
+                    dịch vụ phim quảng cáo
+                </a>
+                <ul class='devmastermenu-submenu'>
+                    <li><a href="~/dich-vu-phim-quang-cao">Dịch vụ phim quảng cáo SUCO</a></li>
+                    <li><a href="~/phim-quang-cao-san-pham-dich-vu">Phim quảng cáo sản phẩm dịch vụ</a></li>
+                    <li><a href="~/chup-anh-quay-phim-su-kien">Chụp ảnh - Quay phim sự kiện</a></li>
+                    <li><a href="~/phim-quang-cao-san-pham-dich-vu-truyen-thong-online">Phim marketing - truyền thông online</a></li>
+                    <li><a href="~/phim-quang-cao-theo-yeu-cau">Phim quảng cáo theo yêu cầu</a></li>
+                </ul>
+            </li>
+            <li class="gioi-thieu">
+                <a class="text-uppercase" href="/gioi-thieu/ve-suco-quoc-te">
+                    về SUCO quốc tế
+                </a>
+            </li>
+            <li class="active"><a class="text-uppercase" href="~/">Trang chủ</a></li>*@
+        </ul>
+    </nav>
+</div>
