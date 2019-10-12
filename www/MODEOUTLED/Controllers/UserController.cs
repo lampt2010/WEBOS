@@ -77,6 +77,11 @@ namespace MODEOUTLED.Controllers
         #region[UserCreate]
         public ActionResult UserCreate()
         {
+            var data = db.UserModules.Select(c => new {
+                ModuleID = c.ID,
+                ModuleName = c.Name
+            }).ToList();
+            ViewBag.permissions = new MultiSelectList(data, "ModuleID", "ModuleName"); ;
             return View();
         }
         #endregion
@@ -92,7 +97,8 @@ namespace MODEOUTLED.Controllers
                 user.UserName = collection["UserName"];
                 user.Password = collection["Password"];
                 user.Email = collection["Email"];
-                user.Permission = short.Parse(collection["Permission"]);
+                user.UserModuleID = collection["permissions"];
+                //user.Permission = short.Parse(collection["Permission"]);
                 user.Active = (collection["Active"] == "false") ? false : true;
 
                 db.Users.Add(user);
@@ -110,9 +116,57 @@ namespace MODEOUTLED.Controllers
         public ActionResult UserEdit(int id)
         {
             var Edit = db.Users.First(u => u.ID == id);
-            return View(Edit);
+            var data = db.UserModules.Select(c => new {
+                ModuleID = c.ID,
+                ModuleName = c.Name
+            }).ToList();
+            var EditUserModule = new UserModel();
+            EditUserModule.ID = Edit.ID;
+            EditUserModule.UserModule = Edit.UserModuleID.Split(',');
+            EditUserModule.UserName = Edit.UserName;
+            EditUserModule.Email = Edit.Email;
+            EditUserModule.Password = Edit.Password;
+            EditUserModule.Active = Edit.Active;
+            EditUserModule.FullName = Edit.FullName;
+            if (Edit.UserModuleID != null)
+            {
+                ViewBag.permissions = new MultiSelectList(data, "ModuleID", "ModuleName", EditUserModule.UserModule);
+            }
+            else
+            {
+                ViewBag.permissions = new MultiSelectList(data, "ModuleID", "ModuleName");
+            }
+
+            return View(EditUserModule);
         }
         #endregion
+
+        [HttpPost]
+        public ActionResult UserEdit(int id, FormCollection collection)
+        {
+            if (Request.Cookies["Username"] != null)
+            {
+                var catego = db.Users.Find(id);
+                // Lấy dữ liệu từ view
+                string name = collection["Name"];
+                catego.UserName = collection["UserName"];
+                catego.Email = collection["Email"];
+                catego.Password = collection["Password"];
+                catego.FullName = collection["FullName"];
+                var data = collection["UserModule"];
+                catego.UserModuleID = data;
+                catego.Active = (collection["Active"] == "false") ? false : true;
+                db.Entry(catego).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("UserIndex");
+            }
+            else
+            {
+                return Redirect("/Admins/admins");
+            }
+        }
+
+
 
         #region[GroupProductEdit]
         [HttpPost]
@@ -127,7 +181,7 @@ namespace MODEOUTLED.Controllers
                 user.UserName = collection["UserName"];
                 user.Password = collection["Password"];
                 user.Email = collection["Email"];
-                user.Permission = short.Parse(collection["Permission"]);
+              //  user.Permission = short.Parse(collection["Permission"]);
                 user.Active = (collection["Active"] == "false") ? false : true;
 
                 db.SaveChanges();
@@ -302,7 +356,7 @@ namespace MODEOUTLED.Controllers
                                 }
                                 if (!collect["Permission" + id].Equals(""))
                                 {
-                                    Up.Permission = short.Parse(collect["Permission" + id]);
+                                  //      Up.Permission = short.Parse(collect["Permission" + id]);
                                 }
                                 db.Entry(Up).State = System.Data.EntityState.Modified;
                                 db.SaveChanges();
@@ -328,7 +382,7 @@ namespace MODEOUTLED.Controllers
             var user = db.Users.Find(id);
             if (user != null)
             {
-                user.Permission = user.Permission == 1 ? short.Parse("0") : short.Parse("1");
+                //user.Permission = user.Permission == 1 ? short.Parse("0") : short.Parse("1");
             }
             db.Entry(user).State = EntityState.Modified;
             db.SaveChanges();

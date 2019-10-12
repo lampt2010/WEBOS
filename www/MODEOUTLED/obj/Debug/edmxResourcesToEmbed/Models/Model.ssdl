@@ -665,7 +665,7 @@
     <Property Name="Description" Type="ntext" />
     <Property Name="Active" Type="bit" />
     <Property Name="CreatorID" Type="int" />
-    <Property Name="Permission" Type="smallint" />
+    <Property Name="UserModuleID" Type="varchar" MaxLength="250" />
   </EntityType>
   <EntityType Name="UserModule">
     <Key>

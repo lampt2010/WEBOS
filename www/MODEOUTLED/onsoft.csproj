@@ -810,6 +810,7 @@
     <Compile Include="Models\User.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\UserModule.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -2748,6 +2749,7 @@
     <Content Include="Views\Language\LanguageCreateot.cshtml" />
     <Content Include="Views\Language\LanguageEditot.cshtml" />
     <Content Include="Views\Library\LibraryEditot.cshtml" />
+    <Content Include="Views\User\UserEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

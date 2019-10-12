@@ -228,14 +228,14 @@ namespace MODEOUTLED.Controllers
         {
             var user = collect["Username"];
             var pass = collect["Pass"];
-            var list = db.Members.Where(n => n.Username == user && n.Password==pass).ToList();
+            var list = db.Users.Where(n => n.UserName == user && n.Password==pass).ToList();
             if (list.Count>0)
             {
 
                 HttpCookie UserCookie = new HttpCookie("Username");
                 UserCookie.Values["UserNameText"] = user.ToString();
-                UserCookie.Values["PasswordText"] = pass.ToString();
-                UserCookie.Values["FullName"] = Server.UrlEncode(list[0].Name.Trim());
+                UserCookie.Values["FullName"] = Server.UrlEncode(list[0].FullName.Trim());
+               // UserCookie.Values["UserModuleID"] 
                 UserCookie.Expires = DateTime.Now.AddHours(2);
                 Response.Cookies.Add(UserCookie);
 
@@ -253,12 +253,17 @@ namespace MODEOUTLED.Controllers
             }
             else
             {
-                var adv = db.Advertises.Where(a => a.Position == 0).SingleOrDefault();
+                
                 ViewBag.Err = "Đăng nhập không thành công!";
-                return View(adv);
+                return View();
             }
         }
         #endregion
+
+        public ActionResult Logout()
+        {
+            return Redirect("admins");
+        }
 
     }
 }

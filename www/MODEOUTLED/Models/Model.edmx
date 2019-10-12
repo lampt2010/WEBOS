@@ -670,7 +670,7 @@
           <Property Name="Description" Type="ntext" />
           <Property Name="Active" Type="bit" />
           <Property Name="CreatorID" Type="int" />
-          <Property Name="Permission" Type="smallint" />
+          <Property Name="UserModuleID" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="UserModule">
           <Key>
@@ -4322,7 +4322,7 @@ FROM [dbo].[v_UserModule] AS [v_UserModule]</DefiningQuery>
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Active" Type="Boolean" />
           <Property Name="CreatorID" Type="Int32" />
-          <Property Name="Permission" Type="Int16" />
+          <Property Name="UserModuleID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="UserModule">
           <Key>
@@ -5113,7 +5113,7 @@ FROM [dbo].[v_UserModule] AS [v_UserModule]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities3" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AccBanks" EntityType="Self.AccBank" />
           <EntitySet Name="Advertises" EntityType="Self.Advertise" />
           <EntitySet Name="Banks" EntityType="Self.Bank" />
@@ -8420,7 +8420,7 @@ FROM [dbo].[v_UserModule] AS [v_UserModule]</DefiningQuery>
           <Property Type="String" Name="Description" Nullable="true" MaxLength="Max" />
           <Property Type="Boolean" Name="Active" Nullable="true" />
           <Property Type="Int32" Name="CreatorID" Nullable="true" />
-          <Property Type="Int16" Name="Permission" Nullable="true" />
+          <Property Type="String" Name="UserModuleID" Nullable="true" MaxLength="250" />
         </ComplexType>
         <ComplexType Name="sp_User_GetById_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -8438,7 +8438,7 @@ FROM [dbo].[v_UserModule] AS [v_UserModule]</DefiningQuery>
           <Property Type="String" Name="Description" Nullable="true" MaxLength="Max" />
           <Property Type="Boolean" Name="Active" Nullable="true" />
           <Property Type="Int32" Name="CreatorID" Nullable="true" />
-          <Property Type="Int16" Name="Permission" Nullable="true" />
+          <Property Type="String" Name="UserModuleID" Nullable="true" MaxLength="250" />
         </ComplexType>
         <ComplexType Name="sp_User_Paging_Result">
           <Property Type="Int64" Name="RowNum" Nullable="true" />
@@ -8457,7 +8457,7 @@ FROM [dbo].[v_UserModule] AS [v_UserModule]</DefiningQuery>
           <Property Type="String" Name="Description" Nullable="true" MaxLength="Max" />
           <Property Type="Boolean" Name="Active" Nullable="true" />
           <Property Type="Int32" Name="CreatorID" Nullable="true" />
-          <Property Type="Int16" Name="Permission" Nullable="true" />
+          <Property Type="String" Name="UserModuleID" Nullable="true" MaxLength="250" />
         </ComplexType>
         <ComplexType Name="sp_UserModule_GetByAll_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -8514,7 +8514,7 @@ FROM [dbo].[v_UserModule] AS [v_UserModule]</DefiningQuery>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities1">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities3">
           <EntitySetMapping Name="AccBanks">
             <EntityTypeMapping TypeName="Model.AccBank">
               <MappingFragment StoreEntitySet="AccBank">
@@ -9218,7 +9218,7 @@ FROM [dbo].[v_UserModule] AS [v_UserModule]</DefiningQuery>
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="CreatorID" ColumnName="CreatorID" />
-                <ScalarProperty Name="Permission" ColumnName="Permission" />
+                <ScalarProperty Name="UserModuleID" ColumnName="UserModuleID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -11723,7 +11723,7 @@ FROM [dbo].[v_UserModule] AS [v_UserModule]</DefiningQuery>
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="CreatorID" ColumnName="CreatorID" />
-                <ScalarProperty Name="Permission" ColumnName="Permission" />
+                <ScalarProperty Name="UserModuleID" ColumnName="UserModuleID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -11745,7 +11745,7 @@ FROM [dbo].[v_UserModule] AS [v_UserModule]</DefiningQuery>
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="CreatorID" ColumnName="CreatorID" />
-                <ScalarProperty Name="Permission" ColumnName="Permission" />
+                <ScalarProperty Name="UserModuleID" ColumnName="UserModuleID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -11770,7 +11770,7 @@ FROM [dbo].[v_UserModule] AS [v_UserModule]</DefiningQuery>
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="CreatorID" ColumnName="CreatorID" />
-                <ScalarProperty Name="Permission" ColumnName="Permission" />
+                <ScalarProperty Name="UserModuleID" ColumnName="UserModuleID" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

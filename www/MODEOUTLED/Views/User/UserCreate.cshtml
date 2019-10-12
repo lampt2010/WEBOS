@@ -208,15 +208,16 @@
                                         <td class="key">Quyền <span class="Required">*</span>
                                         </td>
                                         <td>
-                                            @Html.TextBoxFor(model => model.Permission,new { @class = "text" })
-                                            <span class="tooltip-help"><span class="tooltipContent">
-                                                <p class="tooltiptitle">
-                                                    Quyền
-                                                </p>
-                                                <p class="tooltipmessage">
-                                                    Quyền
-                                                </p>
-                                            </span></span>
+                                            @*@Html.TextBoxFor(model => model.Permission,new { @class = "text" })
+        <span class="tooltip-help"><span class="tooltipContent">
+            <p class="tooltiptitle">
+                Quyền
+            </p>
+            <p class="tooltipmessage">
+                Quyền
+            </p>
+        </span></span>*@
+                                           @Html.ListBox("permissions", (MultiSelectList)ViewBag.permissions)
                                         </td>
                                     </tr>
 

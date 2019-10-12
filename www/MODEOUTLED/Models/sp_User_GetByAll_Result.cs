@@ -28,6 +28,6 @@ namespace onsoft.Models
         public string Description { get; set; }
         public Nullable<bool> Active { get; set; }
         public Nullable<int> CreatorID { get; set; }
-        public Nullable<short> Permission { get; set; }
+        public string UserModuleID { get; set; }
     }
 }

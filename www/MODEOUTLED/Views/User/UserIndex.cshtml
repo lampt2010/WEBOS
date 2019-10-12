@@ -432,7 +432,7 @@
                                     <th scope="col" class="text">UserName</th>
                                     <th scope="col" class="text">Password</th>
                                     <th scope="col" class="text">Email</th>
-                                    <th scope="col" class="number">Quyền</th>
+                                    @*<th scope="col" class="number">Quyền</th>*@
                                     <th scope="col" class="number">Kích hoạt</th>
                                     <th scope="col" class="number">Chức năng</th>
 
@@ -460,9 +460,9 @@
                                             @Html.TextBox("Ord" + Model[i].ID, @Model[i].Email, new { @style = "width:190px", @class = "Email", @id = @Model[i].ID })
                                         </td>
 
-                                        <td class="number" style="width: 50px;">
+                                        @*<td class="number" style="width: 50px;">
                                             @Html.CheckBox("Permission", @Model[i].Permission == 1 ? true : false, new { @class = "Permission", @id = @Model[i].ID })
-                                        </td>
+                                        </td>*@
 
                                         <td class="number" style="width: 50px;">
                                             @Html.CheckBox("Active", @Model[i].Active == true ? true : false, new { @class = "Active", @id = @Model[i].ID })
@@ -470,7 +470,8 @@
 
 
                                         <td class="number" style="width: 60px;">
-
+                                            <a href="../../User/UserEdit?id=@Model[i].ID" class="action-link-button"
+                                               title="Chỉnh sửa "><i class="icon-edit"></i></a>
                                             <a href="../../User/UserDelete?id=@Model[i].ID&page=@ViewBag.mPage&pagesize=@ViewBag.PageSize" class="yesno action-link-button"
                                                 title="Bạn chắc chắn muốn xóa người dùng này ?"><i class="icon-remove"></i></a>
 

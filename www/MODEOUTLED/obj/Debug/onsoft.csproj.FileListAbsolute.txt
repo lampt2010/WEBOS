@@ -688,3 +688,4 @@ E:\OS\WEBOS\www\MODEOUTLED\obj\Debug\onsoft.csproj.CoreCompileInputs.cache
 E:\OS\WEBOS\www\MODEOUTLED\obj\Debug\onsoft.csproj.CopyComplete
 E:\OS\WEBOS\www\MODEOUTLED\obj\Debug\onsoft.dll
 E:\OS\WEBOS\www\MODEOUTLED\obj\Debug\onsoft.pdb
+E:\OS\WEBOS\www\MODEOUTLED\obj\Debug\onsoft.csprojAssemblyReference.cache

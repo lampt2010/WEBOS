@@ -47,13 +47,38 @@
 
     <script type="text/javascript">
         function DeleteConfirm() {
-            debugger;
             if (confirm("Bạn có chắc chắn muốn xóa bản ghi này?"))
                 return true;
             else
                 return false;
         }
         checked = false;
+        function Logout()
+        {
+            $.ajax({
+                url: '/Admin/LoadDetailLibraryById',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    id:$('#hideLibraryID').val()
+                },
+                success: function(response) {
+                     
+                    $j('#exampleModal').modal('show');
+                    var chuoi = "";
+                    for (var i = 0; i < response.data.length; i++) {
+                        chuoi += "<div style='float:left'><img src='" +
+                            response.data[i] +
+                            "' width='100'/><a href='#' class='deleteImg' ><i class='fa fa-times'></i>xoa</a></div>";
+                    }
+                    $('#imageList').append(chuoi);
+                    $('.deleteImg').off('click').on('click', function() {
+                        $(this).parent().remove()
+                    })
+                }
+            });
+        }
+
     </script>
 
 </head>
@@ -89,7 +114,7 @@
                                 admin</a><a href="#" data-toggle="dropdown" class="btn btn-info dropdown-toggle dropdown-toggle-acount"><span class="icon-caret-down"></span></a>
                             <ul class="dropdown-menu custome">
                                 @*<li><a href="#"><i class="icon-key"></i>Đổi mật khẩu</a></li>*@
-                                <li><a id="siteUser_Lbtn_Logout" class="NormalGray" href="javascript:__doPostBack(&#39;ctl00$siteUser$Lbtn_Logout&#39;,&#39;&#39;)"><i class="icon-signout"></i>Thoát</a></li>
+                                <li><a id="siteUser_Lbtn_Logout" class="NormalGray" href="/Admins/Logout" ><i class="icon-signout"></i>Thoát</a></li>
                             </ul>
                            
 

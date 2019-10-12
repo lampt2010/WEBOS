@@ -718,7 +718,7 @@
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Active" Type="Boolean" />
     <Property Name="CreatorID" Type="Int32" />
-    <Property Name="Permission" Type="Int16" />
+    <Property Name="UserModuleID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="UserModule">
     <Key>
@@ -1509,7 +1509,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
+  <EntityContainer Name="Entities3" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="AccBanks" EntityType="Self.AccBank" />
     <EntitySet Name="Advertises" EntityType="Self.Advertise" />
     <EntitySet Name="Banks" EntityType="Self.Bank" />
@@ -4816,7 +4816,7 @@
     <Property Type="String" Name="Description" Nullable="true" MaxLength="Max" />
     <Property Type="Boolean" Name="Active" Nullable="true" />
     <Property Type="Int32" Name="CreatorID" Nullable="true" />
-    <Property Type="Int16" Name="Permission" Nullable="true" />
+    <Property Type="String" Name="UserModuleID" Nullable="true" MaxLength="250" />
   </ComplexType>
   <ComplexType Name="sp_User_GetById_Result">
     <Property Type="Int32" Name="ID" Nullable="false" />
@@ -4834,7 +4834,7 @@
     <Property Type="String" Name="Description" Nullable="true" MaxLength="Max" />
     <Property Type="Boolean" Name="Active" Nullable="true" />
     <Property Type="Int32" Name="CreatorID" Nullable="true" />
-    <Property Type="Int16" Name="Permission" Nullable="true" />
+    <Property Type="String" Name="UserModuleID" Nullable="true" MaxLength="250" />
   </ComplexType>
   <ComplexType Name="sp_User_Paging_Result">
     <Property Type="Int64" Name="RowNum" Nullable="true" />
@@ -4853,7 +4853,7 @@
     <Property Type="String" Name="Description" Nullable="true" MaxLength="Max" />
     <Property Type="Boolean" Name="Active" Nullable="true" />
     <Property Type="Int32" Name="CreatorID" Nullable="true" />
-    <Property Type="Int16" Name="Permission" Nullable="true" />
+    <Property Type="String" Name="UserModuleID" Nullable="true" MaxLength="250" />
   </ComplexType>
   <ComplexType Name="sp_UserModule_GetByAll_Result">
     <Property Type="Int32" Name="ID" Nullable="false" />
