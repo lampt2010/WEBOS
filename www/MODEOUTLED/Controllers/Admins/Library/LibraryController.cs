@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
+using DocumentFormat.OpenXml.Office2010.ExcelAc;
 using onsoft.Models;
 using PagedList;
 
@@ -13,14 +17,14 @@ namespace onsoft.Controllers.Admins.Library
         //
         // GET: /Library/
         ModeoutleddbContext db = new ModeoutleddbContext();
-        #region[NewsIndexot]
-        public ActionResult LibraryIndexot(string sortOrder, string sortName, string sortGroup, int? page, string currentNewsCodeFilter, string currentLibraryNameFilter, string Libraryname, string currentGroupNewsFilter, string GroupNews, string currentNewsAmount)
+        #region[LibraryIndexot]
+        public ActionResult LibraryIndexot(string sortOrder, string sortName, string sortGroup, int? page, string currentNewsCodeFilter, string currentLibraryNameFilter, string Libraryname, string currentGroupLibraryFilter, string GroupLibrary, string currentNewsAmount)
         {
 
             if (Request.HttpMethod == "GET")
             {
                 Libraryname = currentLibraryNameFilter;
-                GroupNews = currentGroupNewsFilter;
+                GroupLibrary = currentGroupLibraryFilter;
             }
             else
             {
@@ -28,7 +32,7 @@ namespace onsoft.Controllers.Admins.Library
             }
 
             ViewBag.CurrentNewsNameFilter = Libraryname;
-            ViewBag.currentGroupNewsFilter = GroupNews;
+            ViewBag.currentGroupLibraryFilter = GroupLibrary;
 
             ViewBag.CurrentSortOrder = sortOrder;
             ViewBag.SortOrderParm = sortOrder == "ord asc" ? "ord desc" : "ord asc";
@@ -64,26 +68,26 @@ namespace onsoft.Controllers.Admins.Library
             }
 
             // Tìm theo nhóm Tin tức
-            if (!String.IsNullOrEmpty(GroupNews))
+            if (!String.IsNullOrEmpty(GroupLibrary))
             {
-                int groupid = Int32.Parse(GroupNews);
+                int groupid = Int32.Parse(GroupLibrary);
                 all = all.Where(p => p.GroupLibraryID == groupid).OrderByDescending(p => p.Id).ToList();
             }
             if (Session["Namesearch"] != null)
             {
                 all = all.Where(p => p.Name.ToUpper().Contains(Session["Namesearch"].ToString().ToUpper())).OrderByDescending(p => p.Id).ToList();
             }
-            if (Session["GroupNews"] != null)
+            if (Session["GroupLibrary"] != null)
             {
                 if (Session["Namesearch"] != null)
                 {
-                    all = all.Where(p => p.GroupLibraryID == int.Parse(Session["GroupNews"].ToString()) && p.Name.ToUpper().Contains(Session["Namesearch"].ToString().ToUpper())).OrderByDescending(p => p.Id).ToList();
+                    all = all.Where(p => p.GroupLibraryID == int.Parse(Session["GroupLibrary"].ToString()) && p.Name.ToUpper().Contains(Session["Namesearch"].ToString().ToUpper())).OrderByDescending(p => p.Id).ToList();
                 }
                 else
                 {
-                    all = all.Where(p => p.GroupLibraryID == int.Parse(Session["GroupNews"].ToString())).OrderByDescending(p => p.Id).ToList();
+                    all = all.Where(p => p.GroupLibraryID == int.Parse(Session["GroupLibrary"].ToString())).OrderByDescending(p => p.Id).ToList();
                 }
-                Session["GroupNews"] = null;
+                Session["GroupLibrary"] = null;
             }
             if (Session["Namesearch"] != null) { Session["Namesearch"] = null; }
             #endregion
@@ -155,6 +159,11 @@ namespace onsoft.Controllers.Admins.Library
             {
                 ViewBag.GroupLibrary = new SelectList(cat, "Id", "Name");
             }
+
+            if (cat.Count == 0)
+            {
+                ViewBag.GroupLibrary = new SelectList(cat, "Id", "Name");
+            }
             #endregion
 
             #region[Số Tin tức hiển thị trên trang]
@@ -185,7 +194,7 @@ namespace onsoft.Controllers.Admins.Library
             return View(Newss);
         }
         #endregion
-        #region[NewsCreateot]
+        #region[LibraryCreateot]
         public ActionResult LibraryCreateot()
         {
 
@@ -207,32 +216,30 @@ namespace onsoft.Controllers.Admins.Library
             return View();
         }
         #endregion
-        #region[NewsCreate]
+        #region[LibraryCreate]
         [HttpPost]
         [ValidateInput(false)]
-        public ActionResult LibraryCreate(FormCollection collection, News news, HttpPostedFileBase fileImg)
+        public ActionResult LibraryCreate(FormCollection collection, Models.Library news, HttpPostedFileBase fileImg)
         {
             int idmem = 0;
             if (Session["uId"] != null) { idmem = int.Parse(Session["uId"].ToString()); }
             if (Request.Cookies["Username"] != null)
             {
+               
                 news.Name = collection["Name"];
-                news.Tag = StringClass.NameToTag(collection["Name"]);
                 news.Image = collection["Image"];
-                news.Content = collection["Content"];
-                news.Detail = collection["Detail"];
-                int GroupNews = Convert.ToInt32(collection["GroupNews"]);
-                news.IdGroup = GroupNews;
+                int GroupLibrary = Convert.ToInt32(collection["GroupLibrary"]);
+                news.GroupLibraryID = GroupLibrary;
                 news.Keyword = collection["Keyword"];
                 news.Description = collection["Description"];
                 news.Title = collection["Title"];
                 news.Ord = Convert.ToInt32(collection["Ord"]);
-                news.Index = (collection["Index"] == "false") ? false : true;
-                news.Active = (collection["Active"] == "false") ? false : true;
+                news.Action = (collection["Action"] == "false") ? false : true;
                 news.Lang = Session["Lang"] != null ? Session["Lang"].ToString() : "vi";
-                news.View = 0;//so luot xem
-                news.SDate = DateTime.Now;
-                db.sp_News_Insert(news.Name, news.Tag, news.Title, news.Keyword, news.Description, news.Image, news.SDate, news.Content, news.Detail, news.Index, news.View, news.IdGroup, news.Ord, news.Active, news.Lang);
+                news.Views = 0;//so luot xem
+                news.CreateDate = DateTime.Now;
+                db.Entry(news).State = EntityState.Added;
+                //db.sp_News_Insert(news.Name, news.Tag, news.Title, news.Keyword, news.Description, news.Image, news.SDate, news.Content, news.Detail, news.Index, news.View, news.IdGroup, news.Ord, news.Active, news.Lang);
                 db.SaveChanges();
                 return RedirectToAction("LibraryIndexot");
             }
@@ -242,6 +249,235 @@ namespace onsoft.Controllers.Admins.Library
             }
         }
         #endregion
+
+        #region[LibraryEditot]
+        public ActionResult LibraryEditot(int id)
+        {
+            string chuoi = "";
+            string Lang = Session["Lang"].ToString();
+            var Edit = db.Libraries.First(m => m.Id == id);
+            var cat = db.GroupLibraries.Where(n => n.Active == true && n.Lang == Lang).ToList();
+            ViewBag.GroupLibrary = new SelectList(cat, "Id", "Name", Edit.GroupLibraryID);
+            return View(Edit);
+        }
+        #endregion
+        #region[LibraryEdit]
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult LibraryEdit(int id, FormCollection collection, HttpPostedFileBase fileImg)
+        {
+            if (Request.Cookies["Username"] != null)
+            {
+                var lib = db.Libraries.Find(id);
+                lib.Name = collection["Name"];
+                lib.Title = collection["Title"];
+                lib.Image = collection["Image"];
+                lib.Keyword = collection["Keyword"];
+                lib.Description = collection["Description"];
+                int IdGroup = Convert.ToInt32(collection["GroupLibrary"]);
+                lib.GroupLibraryID = IdGroup;
+                lib.Ord = Convert.ToInt32(collection["Ord"]);
+                lib.Action = (collection["Action"] == "false") ? false : true;
+                if (lib != null)
+                {
+                    db.Entry(lib).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                return RedirectToAction("LibraryIndexot");
+            }
+            else
+            {
+                return Redirect("/Admins/admins");
+            }
+        }
+        #endregion
+        #region[LibraryDelete]
+        public ActionResult LibraryDelete(int id, int page, int pagesize)
+        {
+            if (Request.Cookies["Username"] != null)
+            {
+                var del = db.Libraries.First(p => p.Id == id);
+                db.Libraries.Remove(del);
+                db.SaveChanges();
+                List<Models.Library> news = db.Libraries.ToList();
+                if ((news.Count % pagesize) == 0)
+                {
+                    if (page > 1)
+                    {
+                        page--;
+                    }
+                    else
+                    {
+                        return RedirectToAction("LibraryIndexot");
+                    }
+                }
+
+                return RedirectToAction("LibraryIndexot", new { page = page });
+            }
+            else
+            {
+                return Redirect("/Admins/admins");
+            }
+        }
+        #endregion
+        #region[MultiCommand]
+        public ActionResult MultiCommand(FormCollection collect)
+        {
+            string Lang = Session["Lang"].ToString();
+            int m = int.Parse(collect["mPage"]);
+            int pagesize = int.Parse(collect["PageSize"]);
+
+            List<Models.Library> news = db.Libraries.Where(x=>x.Lang==Lang).ToList();
+            int lastpage = news.Count / pagesize;
+            if (news.Count % pagesize > 0)
+            {
+                lastpage++;
+            }
+            if (Request.Cookies["Username"] != null)
+            {
+
+                if (collect["btnDelete"] != null)
+                {
+                    //string str = "";
+                    foreach (string key in Request.Form)
+                    {
+                        var checkbox = "";
+                        if (key.Contains("chk"))
+                        {
+                            if (key.Contains("chkIndex") || key.Contains("chkActive"))
+                            {
+
+                            }
+                            else
+                            {
+                                checkbox = Request.Form["" + key];
+                                if (checkbox != "false")
+                                {
+                                    int id = Convert.ToInt32(key.Remove(0, 3));
+                                    var Del = (from del in db.Libraries where del.Id == id select del).SingleOrDefault();
+                                    db.Libraries.Remove(Del);
+                                    db.SaveChanges();
+                                }
+                            }
+                        }
+                    }
+
+                    if (collect["checkAll"] != null)
+                    {
+                        if (m == 1)
+                        {
+                            return RedirectToAction("LibraryIndexot");
+                        }
+
+                        if (m == lastpage)
+                        {
+                            m--;
+                        }
+                    }
+                    return RedirectToAction("LibraryIndexot", new { page = m });
+                }
+                else if (collect["ddlLibraryAmount"] != null)
+                {
+                    if (collect["ddlLibraryAmount"].Length > 0)
+                    {
+                        Session["ddlLibraryAmount"] = collect["ddlLibraryAmount"];
+                    }
+                    return RedirectToAction("LibraryIndexot");
+                }
+
+                else
+                {
+                    string Namesearch = collect["LibraryName"];
+                    string cat = collect["GroupLibrary"];
+                    if (Namesearch.Length > 0)
+                    {
+                        Session["Namesearch"] = Namesearch;
+                    }
+                    if (cat.Length > 0)
+                    {
+                        Session["GroupLibrary"] = cat;
+                    }
+                    return RedirectToAction("LibraryIndexot", new { page = m });
+                }
+            }
+            else
+            {
+                return Redirect("/Admins/admins");
+            }
+        }
+        #endregion
+        // AJAX: /Product/ChangeIndex
+        [HttpPost]
+        public ActionResult ChangeLibrary(int id, string name, string title, string code)
+        {
+            var results = "";
+            var lib = db.Libraries.Find(id);
+            if (lib != null)
+            {
+                if (name != null)
+                {
+                    lib.Name = name;
+                    lib.Title = StringClass.NameToTag(name);
+                    results = "Tên đã được thay đổi.";
+                }
+                if (code != null)
+                {
+                    lib.Code = code;
+                    results = "Mã đã được thay đổi.";
+                }
+                if (title != null)
+                {
+                    lib.Title = title;
+                    results = "Tiêu đề đã được thay đổi.";
+                }
+
+            }
+            db.Entry(lib).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return Json(results);
+        }
+        [HttpPost]
+        public JsonResult AddMultiImages(int id,string images)
+        {
+            var list = db.LibraryDetails.Where(x => x.LibraryID == id).ToList();
+            for (int i = 0; i < list.Count; i++)
+            {
+                db.LibraryDetails.Remove(list[i]);
+                db.SaveChanges();
+            }
+
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            var listImages = serializer.Deserialize<List<string>>(images);
+            for (int i = 0; i < listImages.Count; i++)
+            {
+                var dt = new LibraryDetail();
+                dt.LibraryID = id;
+                dt.Url = listImages[i];
+                db.Entry(dt).State = EntityState.Added;
+                db.SaveChanges();
+            }
+            return Json(new
+            {
+                status = true
+            });
+        }
+        [HttpPost]
+        public JsonResult LoadDetailLibraryById(int id)
+        {
+           
+            var list = db.LibraryDetails.Where(x => x.LibraryID == id).ToList();
+            var tb = new List<string>();
+            for (int i = 0; i < list.Count; i++)
+            {
+                tb.Add(list[i].Url);
+            }
+            return Json(new
+            {
+                data = tb
+            });
+        }
+
 
     }
 }

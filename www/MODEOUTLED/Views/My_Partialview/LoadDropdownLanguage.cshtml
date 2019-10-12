@@ -10,17 +10,17 @@
         {
             if (Session["Lang"].ToString() == Model[i].Code)
             {
-                <option value="@Model[i].Code" selected="selected">@Model[i].Name</option>
+                <option value="@Model[i].Code" style="background-image:url(@Model[i].Images);"  selected="selected">@Model[i].Name</option>
             }
             else
             {
-                <option value="@Model[i].Code">@Model[i].Name</option>
+                <option value="@Model[i].Code" style="background-image:url(@Model[i].Images);">@Model[i].Name</option>
             }
 
         }
         else
         {
-            <option value="@Model[i].Code">@Model[i].Name</option>
+            <option value="@Model[i].Code" style="background-image:url(@Model[i].Images);">@Model[i].Name</option>
         }
     }
     @*<li><a href="#"><i class="icon-key"></i>Đổi mật khẩu</a></li>*@

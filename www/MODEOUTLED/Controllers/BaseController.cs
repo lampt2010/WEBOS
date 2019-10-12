@@ -19,21 +19,21 @@ namespace onsoft.Controllers
             base.Initialize(requestContext);
             if (Session["Lang"] != null)
             {
-                Thread.CurrentThread.CurrentCulture = new CultureInfo(Session["Lang"].ToString());
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo(Session["Lang"].ToString());
+                //Thread.CurrentThread.CurrentCulture = new CultureInfo(Session["Lang"].ToString());
+               // Thread.CurrentThread.CurrentUICulture = new CultureInfo(Session["Lang"].ToString());
             }
             else
             {
-                Thread.CurrentThread.CurrentCulture = new CultureInfo("vi");
-                Thread.CurrentThread.CurrentUICulture = new CultureInfo("vi");
+             //   Thread.CurrentThread.CurrentCulture = new CultureInfo("vi");
+             //   Thread.CurrentThread.CurrentUICulture = new CultureInfo("vi");
                 Session["Lang"] = "vi";
             }
         }
         [HttpPost]
         public ActionResult ChangeCulture(string ddlCulture, string returnUrl)
         {
-            Thread.CurrentThread.CurrentCulture = new CultureInfo(ddlCulture);
-            Thread.CurrentThread.CurrentUICulture = new CultureInfo(ddlCulture);
+           // Thread.CurrentThread.CurrentCulture = new CultureInfo(ddlCulture);
+           // Thread.CurrentThread.CurrentUICulture = new CultureInfo(ddlCulture);
             Session["Lang"] = ddlCulture;
             return Json(new{url=returnUrl}, JsonRequestBehavior.AllowGet);
         }

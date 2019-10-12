@@ -217,6 +217,8 @@
           <Property Name="Description" Type="nvarchar" MaxLength="1000" />
           <Property Name="Image" Type="nvarchar" MaxLength="250" />
           <Property Name="Title" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ModifieDate" Type="datetime" />
         </EntityType>
         <EntityType Name="GroupMember">
           <Key>
@@ -327,6 +329,9 @@
           <Property Name="Title" Type="nvarchar" MaxLength="250" />
           <Property Name="Code" Type="varchar" MaxLength="50" />
           <Property Name="Image" Type="nvarchar" MaxLength="250" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ModifieDate" Type="datetime" />
+          <Property Name="Views" Type="int" />
         </EntityType>
         <EntityType Name="LibraryDetails">
           <Key>
@@ -3826,6 +3831,8 @@ FROM [dbo].[v_UserModule] AS [v_UserModule]</DefiningQuery>
           <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Title" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifieDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Libraries" Relationship="Self.FK_Library_GroupLibrary" FromRole="GroupLibrary" ToRole="Library" />
         </EntityType>
         <EntityType Name="GroupMember">
@@ -3946,6 +3953,9 @@ FROM [dbo].[v_UserModule] AS [v_UserModule]</DefiningQuery>
           <Property Name="Title" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Image" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifieDate" Type="DateTime" Precision="3" />
+          <Property Name="Views" Type="Int32" />
           <NavigationProperty Name="GroupLibrary" Relationship="Self.FK_Library_GroupLibrary" FromRole="Library" ToRole="GroupLibrary" />
           <NavigationProperty Name="LibraryDetails" Relationship="Self.FK_LibraryDetails_Library" FromRole="Library" ToRole="LibraryDetails" />
         </EntityType>
@@ -5103,7 +5113,7 @@ FROM [dbo].[v_UserModule] AS [v_UserModule]</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AccBanks" EntityType="Self.AccBank" />
           <EntitySet Name="Advertises" EntityType="Self.Advertise" />
           <EntitySet Name="Banks" EntityType="Self.Bank" />
@@ -8504,7 +8514,7 @@ FROM [dbo].[v_UserModule] AS [v_UserModule]</DefiningQuery>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities1">
           <EntitySetMapping Name="AccBanks">
             <EntityTypeMapping TypeName="Model.AccBank">
               <MappingFragment StoreEntitySet="AccBank">
@@ -8727,6 +8737,8 @@ FROM [dbo].[v_UserModule] AS [v_UserModule]</DefiningQuery>
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifieDate" ColumnName="ModifieDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -8843,6 +8855,9 @@ FROM [dbo].[v_UserModule] AS [v_UserModule]</DefiningQuery>
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ModifieDate" ColumnName="ModifieDate" />
+                <ScalarProperty Name="Views" ColumnName="Views" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

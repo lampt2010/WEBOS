@@ -2747,6 +2747,7 @@
     <Content Include="Views\Language\_PartialLanguagePaging.cshtml" />
     <Content Include="Views\Language\LanguageCreateot.cshtml" />
     <Content Include="Views\Language\LanguageEditot.cshtml" />
+    <Content Include="Views\Library\LibraryEditot.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

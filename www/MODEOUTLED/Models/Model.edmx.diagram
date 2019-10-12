@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="34d495efd0ab480d9efde59e1f279fcf" Name="Diagram1">
-        <EntityTypeShape EntityType="Model.AccBank" Width="1.5" PointX="16" PointY="12" IsExpanded="true" />
+      <Diagram DiagramId="cc6415252aaa4e7dac0155d268c4dab1" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.AccBank" Width="1.5" PointX="16" PointY="13" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Advertise" Width="1.5" PointX="5.75" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Bank" Width="1.5" PointX="13.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Bank" Width="1.5" PointX="13.75" PointY="13.125" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Bill_Customer" Width="1.5" PointX="11" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Category" Width="1.5" PointX="16" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Category" Width="1.5" PointX="16" PointY="7.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.CatPermission" Width="1.5" PointX="5.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Color" Width="1.5" PointX="0.75" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Config" Width="1.5" PointX="7.75" PointY="14.75" IsExpanded="true" />
@@ -18,22 +18,22 @@
         <EntityTypeShape EntityType="Model.Customer" Width="1.5" PointX="8.75" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Export" Width="1.5" PointX="0.75" PointY="19.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.ExportDetail" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.GroupLibrary" Width="1.5" PointX="13.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.GroupLibrary" Width="1.5" PointX="13.75" PointY="1.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.GroupMember" Width="1.5" PointX="9.75" PointY="14.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.GroupNew" Width="1.5" PointX="2.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.GroupProduct" Width="1.5" PointX="13.75" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.GroupSupport" Width="1.5" PointX="11.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.GroupProduct" Width="1.5" PointX="13.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.GroupSupport" Width="1.5" PointX="11.75" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Import" Width="1.5" PointX="3.75" PointY="36" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.ImportDetail" Width="1.5" PointX="6" PointY="10.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Language" Width="1.5" PointX="13.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Language" Width="1.5" PointX="13.75" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Library" Width="1.5" PointX="16" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.LibraryDetail" Width="1.5" PointX="18.25" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.LibraryDetail" Width="1.5" PointX="18.25" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Member" Width="1.5" PointX="1.5" PointY="26.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.MemberWareHouse" Width="1.5" PointX="3.75" PointY="29.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Menu" Width="1.5" PointX="15.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Menu" Width="1.5" PointX="15.75" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.News" Width="1.5" PointX="5" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Ord" Width="1.5" PointX="11" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.OrderDetail" Width="1.5" PointX="17.75" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.OrderDetail" Width="1.5" PointX="17.75" PointY="16.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.PermissionModule" Width="1.5" PointX="18.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.PriceCity" Width="1.5" PointX="18.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.ProColor" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
@@ -41,35 +41,35 @@
         <EntityTypeShape EntityType="Model.ProImage" Width="1.5" PointX="3" PointY="19.375" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.ProPrice" Width="1.5" PointX="3" PointY="22.25" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.ProSize" Width="1.5" PointX="3" PointY="14.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Province" Width="1.5" PointX="9.75" PointY="18.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Province_Price" Width="1.5" PointX="18.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Province" Width="1.5" PointX="18.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Province_Price" Width="1.5" PointX="9.75" PointY="19.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Recipient" Width="1.5" PointX="11" PointY="10.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.SearchPrice" Width="1.5" PointX="11.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SearchPrice" Width="1.5" PointX="11.75" PointY="19.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Shop" Width="1.5" PointX="19.75" PointY="14.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Size" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.Supplier" Width="1.5" PointX="1.5" PointY="36.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Support" Width="1.5" PointX="17.75" PointY="19.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="19.75" PointY="18.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.UserModule" Width="1.5" PointX="20.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Support" Width="1.5" PointX="19.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.User" Width="1.5" PointX="20.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.UserModule" Width="1.5" PointX="20.75" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.WareHouse" Width="1.5" PointX="1.5" PointY="32" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Baocao_GroupProduct" Width="1.5" PointX="20.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.Baocao_Product" Width="1.5" PointX="20.75" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.v_Advertise_in_GrpID" Width="1.5" PointX="20.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.v_GroupNews_in_GrpID" Width="1.5" PointX="5.75" PointY="21.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.v_Member_GroupMember" Width="1.5" PointX="11.75" PointY="21.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.v_ModuleUser" Width="1.5" PointX="13.75" PointY="21.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.v_News_GroupNews" Width="1.5" PointX="21.75" PointY="14.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.v_OrderDetail_Product" Width="1.5" PointX="21.75" PointY="20.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.v_Permission_GroupProduct" Width="1.5" PointX="22.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.v_Product_Baocao" Width="1.5" PointX="22.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.v_Product_BaocaoBieudo" Width="1.5" PointX="22.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.v_Product_DescTotalNumber" Width="1.5" PointX="7.75" PointY="22.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.v_Product_NameGroup" Width="1.5" PointX="23.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.v_ProductForMonth" Width="1.5" PointX="23.75" PointY="18.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.v_Products_OrderTotal_Desc" Width="1.5" PointX="23.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Baocao_GroupProduct" Width="1.5" PointX="20.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Baocao_Product" Width="1.5" PointX="20.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.v_Advertise_in_GrpID" Width="1.5" PointX="5.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.v_GroupNews_in_GrpID" Width="1.5" PointX="21.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.v_Member_GroupMember" Width="1.5" PointX="21.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.v_ModuleUser" Width="1.5" PointX="22.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.v_News_GroupNews" Width="1.5" PointX="22.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.v_OrderDetail_Product" Width="1.5" PointX="22.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.v_Permission_GroupProduct" Width="1.5" PointX="11.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.v_Product_Baocao" Width="1.5" PointX="13.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.v_Product_BaocaoBieudo" Width="1.5" PointX="15.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.v_Product_DescTotalNumber" Width="1.5" PointX="7.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.v_Product_NameGroup" Width="1.5" PointX="23.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.v_ProductForMonth" Width="1.5" PointX="17.75" PointY="23.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.v_Products_OrderTotal_Desc" Width="1.5" PointX="23.75" PointY="22.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Model.v_Support_NameGroup" Width="1.5" PointX="24.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.v_Top5Order" Width="1.5" PointX="13.75" PointY="24.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="Model.v_UserModule" Width="1.5" PointX="24.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.v_Top5Order" Width="1.5" PointX="24.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.v_UserModule" Width="1.5" PointX="19.75" PointY="24.75" IsExpanded="true" />
         <AssociationConnector Association="Model.PRK_ACCBANK_BANK" ManuallyRouted="false" />
         <AssociationConnector Association="Model.FRK_NGUOINHAN_KHACHHANG" ManuallyRouted="false" />
         <AssociationConnector Association="Model.PRK_LOAIHANG_GROUPPRODUCT" ManuallyRouted="false" />

@@ -212,6 +212,8 @@
     <Property Name="Description" Type="nvarchar" MaxLength="1000" />
     <Property Name="Image" Type="nvarchar" MaxLength="250" />
     <Property Name="Title" Type="nvarchar" MaxLength="500" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="ModifieDate" Type="datetime" />
   </EntityType>
   <EntityType Name="GroupMember">
     <Key>
@@ -322,6 +324,9 @@
     <Property Name="Title" Type="nvarchar" MaxLength="250" />
     <Property Name="Code" Type="varchar" MaxLength="50" />
     <Property Name="Image" Type="nvarchar" MaxLength="250" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="ModifieDate" Type="datetime" />
+    <Property Name="Views" Type="int" />
   </EntityType>
   <EntityType Name="LibraryDetails">
     <Key>

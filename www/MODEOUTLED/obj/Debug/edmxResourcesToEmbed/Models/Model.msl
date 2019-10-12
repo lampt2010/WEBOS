@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities1">
     <EntitySetMapping Name="AccBanks">
       <EntityTypeMapping TypeName="Model.AccBank">
         <MappingFragment StoreEntitySet="AccBank">
@@ -223,6 +223,8 @@
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifieDate" ColumnName="ModifieDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -339,6 +341,9 @@
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="Code" ColumnName="Code" />
           <ScalarProperty Name="Image" ColumnName="Image" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="ModifieDate" ColumnName="ModifieDate" />
+          <ScalarProperty Name="Views" ColumnName="Views" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

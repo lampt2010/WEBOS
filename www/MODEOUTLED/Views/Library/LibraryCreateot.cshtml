@@ -2,6 +2,7 @@
     ViewBag.Title = "Thêm mới thư viện";
     Layout = "~/Views/Shared/_LayoutAdmins.cshtml";
 }
+<script src="~/Scripts/common.js"></script>
 @section Scripts
 {
     <!-- Validate Data -->
@@ -37,6 +38,12 @@
             });
 
         })(jQuery, window, document);
+
+        function ChangeSlug(ele) {
+            var sl = Slug(ele);
+            $('#Title').val(sl);
+        }
+
     </script>
     <!-- End Validate Data -->
 }
@@ -147,7 +154,7 @@
                                             Tên tin <span class="Required">*</span>
                                         </td>
                                         <td>
-                                            @Html.TextBox("Name", "", new { @class = "text" })
+                                            @Html.TextBox("Name", "", new { @class = "text",@onchange="ChangeSlug(this)" })
                                             <span class="tooltip-help">
                                                 <span class="tooltipContent">
                                                     <p class="tooltiptitle">

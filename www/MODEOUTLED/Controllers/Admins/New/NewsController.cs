@@ -183,7 +183,7 @@ namespace MODEOUTLED.Controllers.Admins.New
             ViewBag.ddlNewsAmount = items;
             #endregion
 
-            ViewBag.TotalNews = db.News.Count();
+            ViewBag.TotalNews = db.News.Where(x=>x.Lang==Lang).Count();
 
             // Phân trang
             PagedList<sp_News_GetByAll_Result> Newss = (PagedList<sp_News_GetByAll_Result>)all.ToPagedList(pageNumber, pageSize);

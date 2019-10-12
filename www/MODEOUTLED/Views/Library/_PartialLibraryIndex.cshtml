@@ -3,7 +3,7 @@
 @{
     Layout = null;
 }
-
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
 <!--Sử dụng cho Confirm delete-->
 <script type="text/javascript">
     $(document).ready(function () {
@@ -17,7 +17,6 @@
 <script type="text/javascript">
     $(function () {
         $('#msg').hide();
-
         // Ajax sử dụng cho change active
         $(".Active").click(function () {
             var Id = $(this).attr("id");
@@ -29,7 +28,6 @@
                     $('#msg').fadeOut(5000);
                 });
         });
-
         // Ajax sử dụng cho change index
         $(".Index").click(function () {
             var Id = $(this).attr("id");
@@ -41,7 +39,6 @@
                     $('#msg').fadeOut(5000);
                 });
         });
-
         // Ajax sử dụng cho change Name
         $(".Namep").change(function () {
             var id = $(this).attr("id");
@@ -49,7 +46,7 @@
             if (name == "") {
                 // Báo lỗi nhập dữ liệu
                 $('#msg').show();
-                $('#update-message').removeClass().addClass("alert alert-error").text("Phải nhập tên sản phẩm.");
+                $('#update-message').removeClass().addClass("alert alert-error").text("Phải nhập tên thư viện.");
                 $('#msg').fadeOut(5000);
             } else {
                 clearUpdateMessage();
@@ -62,7 +59,25 @@
                     });
             }
         });
-
+        $(".Title").change(function () {
+            var id = $(this).attr("id");
+            var title = $(this).val();
+            if (title == "") {
+                // Báo lỗi nhập dữ liệu
+                $('#msg').show();
+                $('#update-message').removeClass().addClass("alert alert-error").text("Phải nhập tiêu đề.");
+                $('#msg').fadeOut(5000);
+            } else {
+                clearUpdateMessage();
+                $.post("/Library/ChangeLibrary", { "id": id, "title": title },
+                    function (data) {
+                        // Thay đổi thành công
+                        $('#msg').show();
+                        $('#update-message').removeClass().addClass("alert alert-info").text(htmlDecode(data));
+                        $('#msg').fadeOut(5000);
+                    });
+            }
+        });
 
 
     });
@@ -84,7 +99,6 @@
 <!--Thay đổi chiều mũi tên khi sắp xếp-->
 <script type="text/javascript">
     $(document).ready(function () {
-
         var currentSortOrder = '@ViewBag.CurrentSortOrder';
             if (currentSortOrder == "ord asc") {
                 $('#ord').removeClass('NumberOrdDown').addClass("NumberOrdUp");
@@ -92,16 +106,14 @@
             else {
                 $('#ord').removeClass('NumberOrdUp').addClass("NumberOrdDown");
             }
-
-            var currentSortName = '@ViewBag.CurrentSortName';
+        var currentSortName = '@ViewBag.CurrentSortName';
             if (currentSortName == "name asc") {
                 $('#name').removeClass('NumberOrdDown').addClass("NumberOrdUp");
             }
             else {
                 $('#name').removeClass('NumberOrdUp').addClass("NumberOrdDown");
             }
-
-            var currentSortGroup = '@ViewBag.CurrentSortGroup';
+        var currentSortGroup = '@ViewBag.CurrentSortGroup';
             if (currentSortGroup == "group asc") {
                 $('#group').removeClass('NumberOrdDown').addClass("NumberOrdUp");
             }
@@ -115,7 +127,33 @@
 <!--Ajax sử dụng sắp xếp dữ liệu trực tiếp trên form-->
 <script type="text/javascript">
     $(document).ready(function () {
-
+        $(".curCarSelect").on('click', function (e) {
+           
+            $('#hideLibraryID').val($(this).attr('data-whatever'));
+          
+            $.ajax({
+                url: '/Library/LoadDetailLibraryById',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    id:$('#hideLibraryID').val()
+                },
+                success: function(response) {
+                     
+                    $j('#exampleModal').modal('show');
+                    var chuoi = "";
+                    for (var i = 0; i < response.data.length; i++) {
+                        chuoi += "<div style='float:left'><img src='" +
+                            response.data[i] +
+                            "' width='100'/><a href='#' class='deleteImg' ><i class='fa fa-times'></i>xoa</a></div>";
+                    }
+                    $('#imageList').append(chuoi);
+                    $('.deleteImg').off('click').on('click', function() {
+                        $(this).parent().remove()
+                    })
+                }
+            });
+        });
         // Ajax sử dụng sắp xếp sản phẩm theo tên
         $('#name').click(function () {
             var sortName = '@ViewBag.SortNameParm';
@@ -125,8 +163,50 @@
                     $("#ajaxLibrary").html(data);
                 });
         });
+        $('#btnChooImages').off('click').on('click',
+            function(e) {
+                e.preventDefault();
+                
+                var finder = new CKFinder();
+                finder.selectActionFunction = function(url) {
+                    $('#imageList').append('<div style="float:left"><img src="' +
+                        url +
+                        '" width="100"/><a href="#" class="deleteImg"><i class="fa fa-times"></i>xoa</a></div>');
+                }
+                finder.popup();
+                $('.deleteImg').off('click').on('click', function() {
+                    $(this).parent().remove()
+                })
+
+            });
+        $('#btnSaveImages').off('click').on('click',
+            function() {
+                var images = [];
+                $.each($('#imageList img'),
+                    function(i, item) {
+                        images.push($(item).prop('src'));
+                    });
+                $.ajax({
+                    url: '/Library/AddMultiImages',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        images: JSON.stringify(images),
+                        id:$('#hideLibraryID').val()
+                    },
+                    success: function(response) {
+                        $j('#exampleModal').modal('hide');
+                    }
+                });
+            });
+        function DeleteImage(ele) {
+            $(ele).parent().remove()
+        }
+      
 
     });
+   
+
 </script>
 
 <div id="ajaxLibrary">
@@ -153,8 +233,10 @@
                     <input type="checkbox" onclick="Javascript: chkSelectAll_OnClick(this)" id="chkSelectAll" name="checkAll" />
                 </th>
                 <th scope="col" id="name" class="NumberOrdDown">
-                    @Html.Label("Tiêu đề tin")
+                    @Html.Label("Tên thư viện")
                 </th>
+                <th scope="col" class="text">Tiêu đề</th>
+                <th scope="col" class="number"> Ảnh đại diện</th>
                 <th scope="col" class="number" style="width: 60px;">Số ảnh con</th>
                 <th scope="col" class="number" style="width: 60px;">Kích hoạt</th>
                 <th scope="col" class="number" style="width: 100px; text-align: center">Chức năng</th>
@@ -169,6 +251,19 @@
                     <td class="text" style="vertical-align: middle;">
                         @Html.TextBox("Namep" + Model[i].Id, @Model[i].Name, new { @style = "width:550px; text-align: left", @class = "Namep", @id = @Model[i].Id })
                     </td>
+                    <td class="text">
+                        @Html.TextBox("Title" + Model[i].Id, @Model[i].Title, new { @style = "width:550px; text-align: left", @class = "Title", @id = @Model[i].Id })
+                    </td>
+                    <td>
+                        @if (Model[i].Image != null && Model[i].Image == "")
+                        {
+                            <img src="@Model[i].Image" width="30" height="30"/>
+                        }
+                        else
+                        {
+                            <img src="~/Images/no-image.jpg" width="30" height="30"/>
+                        }
+                        </td>
                     <td class="text-center" style="vertical-align: middle;">
                         @Model[i].LibraryDetails.Count
                     </td>
@@ -176,8 +271,9 @@
                         @Html.CheckBox("chkActive" + Model[i].Id, (Model[i].Action == true) ? true : false, new { @class = "chk Active", @id = @Model[i].Id })
                     </td>
                     <td class="text-center" style="vertical-align: middle;">
+                        <a type="button" class="action-link-button curCarSelect" data-toggle="modal" data-image="@Model[i].LibraryDetails" data-whatever="@Model[i].Id" ><i class="icon-plus"></i></a>
                         <a href="../../Library/LibraryEditot?id=@Model[i].Id" class="action-link-button"
-                           title="Chỉnh sửa tin này"><i class="icon-edit"></i></a>
+                           title="Chỉnh sửa thư viện này"><i class="icon-edit"></i></a>
 
                         <a href="LibraryDelete?id=@Model[i].Id&page=@ViewBag.mPage&pagesize=@ViewBag.PageSize" class="yesno action-link-button"
                            title="Bạn chắc chắn muốn bản ghi này ?"><i class="icon-trash"></i></a>
@@ -193,5 +289,29 @@
     @Html.Partial("_PartialLibraryPaging")
 
     <div style="clear: both;"></div>
+    
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Upload ảnh</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div id="imageList">
+
+                    </div>
+                    <input type="button" id="btnChooImages" value="Chọn ảnh"/>
+                    <input type="hidden" id="hideLibraryID" value="0"/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="btnSaveImages">Send message</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 

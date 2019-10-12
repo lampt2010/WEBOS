@@ -30,6 +30,9 @@ namespace onsoft.Models
         public string Title { get; set; }
         public string Code { get; set; }
         public string Image { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
+        public Nullable<System.DateTime> ModifieDate { get; set; }
+        public Nullable<int> Views { get; set; }
     
         public virtual GroupLibrary GroupLibrary { get; set; }
         public virtual ICollection<LibraryDetail> LibraryDetails { get; set; }

@@ -20,7 +20,7 @@ namespace onsoft.Controllers.Admins.GroupLibrary
         {
             string Lang = Session["Lang"].ToString();
 
-            var all = db.GroupLibraries.ToList();
+            var all = db.GroupLibraries.Where(x=>x.Lang==Lang).ToList();
 
             int pageSize = 15;
             int pageNumber = (page ?? 1);
@@ -42,7 +42,6 @@ namespace onsoft.Controllers.Admins.GroupLibrary
                 lastPage++;
             }
             ViewBag.LastPage = lastPage;
-
             ViewBag.PageSize = pageSize;
             //end [get last page]
 
@@ -288,6 +287,7 @@ namespace onsoft.Controllers.Admins.GroupLibrary
                 if (name != null)
                 {
                     lib.Name = name;
+                    lib.Title = StringClass.NameToTag(name);
                     results = "Tên đã được thay đổi.";
                 }
                 if (code != null)
